@@ -1,9 +1,10 @@
 ﻿using LibraryManagement.Domain.Entities;
+using LibraryManagement.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagement.Infrastructure.Persistence;
 
-public sealed class LibraryDbContext : DbContext
+public sealed class LibraryDbContext : DbContext, IUnitOfWork
 {
     public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options)
     {

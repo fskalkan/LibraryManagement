@@ -12,8 +12,19 @@ public sealed class BookCopyConfiguration : IEntityTypeConfiguration<BookCopy>
 
         builder.HasKey(x => x.Id);
 
-        builder.Property(x => x.Barcode)
-            .HasMaxLength(50)
+        builder.Property(x => x.BookId)
+            .IsRequired();
+
+        builder.OwnsOne(x => x.Barcode, barcode =>
+        {
+            barcode.Property(x => x.Value)
+                .HasColumnName("Barcode")
+                .HasMaxLength(50)
+                .IsRequired();
+        });
+
+        builder.Property(x => x.ShelfLocation)
+            .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(x => x.Status)
