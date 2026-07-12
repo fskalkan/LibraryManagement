@@ -9,9 +9,9 @@ public sealed class BookCopy : Entity
 {
     public Guid BookId { get; private set; }
 
-    public Barcode Barcode { get; private set; }
+    public Barcode Barcode { get; private set; } = null!;
 
-    public string ShelfLocation { get; private set; }
+    public string ShelfLocation { get; private set; } = null!;
 
     public BookCopyStatus Status { get; private set; }
 
@@ -28,7 +28,7 @@ public sealed class BookCopy : Entity
         Status = BookCopyStatus.Available;
     }
 
-    protected BookCopy()
+    private BookCopy()
     {
     }
 

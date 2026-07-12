@@ -6,11 +6,11 @@ namespace LibraryManagement.Domain.Entities;
 
 public sealed class Author : AggregateRoot
 {
-    public FullName FullName { get; private set; }
+    public FullName FullName { get; private set; } = null!;
 
     public DateOnly BirthDate { get; private set; }
 
-    public string? Biography { get; private set; }
+    public string? Biography { get; private set; } = null!;
 
     private Author(
         Guid id,
@@ -24,7 +24,7 @@ public sealed class Author : AggregateRoot
         Biography = biography;
     }
 
-    protected Author()
+    private Author()
     {
     }
 

@@ -9,9 +9,9 @@ public sealed class Book : AggregateRoot
 {
     private readonly List<BookCopy> _copies = [];
 
-    public string Title { get; private set; }
+    public string Title { get; private set; } = null!;
 
-    public Isbn Isbn { get; private set; }
+    public Isbn Isbn { get; private set; } = null!;
 
     public int PublishYear { get; private set; }
 
@@ -40,7 +40,7 @@ public sealed class Book : AggregateRoot
         Status = BookStatus.Available;
     }
 
-    protected Book()
+    private Book()
     {
     }
 

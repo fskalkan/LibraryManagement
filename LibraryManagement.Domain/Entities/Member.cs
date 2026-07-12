@@ -7,9 +7,9 @@ namespace LibraryManagement.Domain.Entities;
 
 public sealed class Member : AggregateRoot
 {
-    public FullName FullName { get; private set; }
+    public FullName FullName { get; private set; } = null!;
 
-    public Email Email { get; private set; }
+    public Email Email { get; private set; } = null!;
 
     public MemberStatus Status { get; private set; }
 
@@ -24,7 +24,7 @@ public sealed class Member : AggregateRoot
         Status = MemberStatus.Active;
     }
 
-    protected Member()
+    private Member()
     {
     }
 

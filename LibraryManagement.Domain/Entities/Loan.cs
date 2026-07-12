@@ -33,7 +33,7 @@ public sealed class Loan : AggregateRoot
         Status = LoanStatus.Active;
     }
 
-    protected Loan()
+    private Loan()
     {
     }
 
