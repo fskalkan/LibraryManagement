@@ -1,6 +1,7 @@
 using LibraryManagement.Api.ExceptionHandlers;
 using LibraryManagement.Application;
 using LibraryManagement.Infrastructure;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseExceptionHandler();
