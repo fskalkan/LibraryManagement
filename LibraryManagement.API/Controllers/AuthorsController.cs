@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibraryManagement.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/authors")]
 public sealed class AuthorsController : ControllerBase
 {
     private readonly IMediator _mediator;
