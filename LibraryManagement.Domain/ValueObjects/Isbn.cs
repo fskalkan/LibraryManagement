@@ -4,7 +4,7 @@ namespace LibraryManagement.Domain.ValueObjects;
 
 public sealed record Isbn
 {
-    public string Value { get; }
+    public string Value { get; private set; } = null!;
 
     private Isbn(string value)
     {

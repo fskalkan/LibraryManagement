@@ -26,13 +26,13 @@ public sealed class BookRepository : IBookRepository
     public async Task<Book?> GetByIsbnAsync(Isbn isbn, CancellationToken cancellationToken = default)
     {
         return await _context.Books
-            .FirstOrDefaultAsync(x => x.Isbn == isbn, cancellationToken);
+            .FirstOrDefaultAsync(x => x.Isbn.Value == isbn.Value, cancellationToken);
     }
 
     public async Task<bool> ExistsByIsbnAsync(Isbn isbn, CancellationToken cancellationToken = default)
     {
         return await _context.Books
-            .AnyAsync(x => x.Isbn == isbn, cancellationToken);
+        .AnyAsync(x => x.Isbn.Value == isbn.Value, cancellationToken);
     }
 
     public async Task AddAsync(Book book, CancellationToken cancellationToken = default)
@@ -64,7 +64,7 @@ public sealed class BookRepository : IBookRepository
     {
         return await _context.Books.AnyAsync(x =>
             x.Id != bookId &&
-            x.Isbn == isbn,
+            x.Isbn.Value == isbn.Value,
             cancellationToken);
     }
 }
