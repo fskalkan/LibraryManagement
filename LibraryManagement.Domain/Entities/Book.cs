@@ -17,9 +17,14 @@ public sealed class Book : AggregateRoot
 
     public Guid AuthorId { get; private set; }
 
+    public Author Author { get; private set; } = null!;
+
     public Guid CategoryId { get; private set; }
 
+    public Category Category { get; private set; } = null!;
+
     public BookStatus Status { get; private set; }
+    
 
     public IReadOnlyCollection<BookCopy> Copies => _copies.AsReadOnly();
 
@@ -92,5 +97,23 @@ public sealed class Book : AggregateRoot
 
         if (_copies.Count == 0)
             Status = BookStatus.Unavailable;
+    }
+
+    public void ChangePublishYear(int publishYear)
+    {
+        if (publishYear > DateTime.UtcNow.Year)
+            throw new DomainException("Publish year cannot be in the future.");
+
+        PublishYear = publishYear;
+    }
+
+    public void ChangeAuthor(Guid authorId)
+    {
+        AuthorId = authorId;
+    }
+
+    public void ChangeCategory(Guid categoryId)
+    {
+        CategoryId = categoryId;
     }
 }

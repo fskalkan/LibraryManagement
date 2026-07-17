@@ -30,9 +30,19 @@ public sealed class BookConfiguration : IEntityTypeConfiguration<Book>
                 .IsRequired();
         });
 
+        builder.HasOne(x => x.Author)
+            .WithMany()
+            .HasForeignKey(x => x.AuthorId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(x => x.Category)
+            .WithMany()
+            .HasForeignKey(x => x.CategoryId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasMany(x => x.Copies)
             .WithOne()
-            .HasForeignKey("BookId")
+            .HasForeignKey(x => x.BookId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
