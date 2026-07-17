@@ -13,6 +13,8 @@ public interface IBookRepository
 
     Task<bool> ExistsByIsbnAsync(Isbn isbn, CancellationToken cancellationToken = default);
 
+    Task<bool> ExistsByIsbnExceptBookAsync(Guid bookId, Isbn isbn, CancellationToken cancellationToken = default);
+
     Task AddAsync(Book book, CancellationToken cancellationToken = default);
 
     void Update(Book book);

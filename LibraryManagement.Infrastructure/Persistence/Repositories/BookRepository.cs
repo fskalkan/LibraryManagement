@@ -59,4 +59,12 @@ public sealed class BookRepository : IBookRepository
         .OrderBy(x => x.Title)
         .ToListAsync(cancellationToken);
     }
+
+    public async Task<bool> ExistsByIsbnExceptBookAsync(Guid bookId, Isbn isbn, CancellationToken cancellationToken = default)
+    {
+        return await _context.Books.AnyAsync(x =>
+            x.Id != bookId &&
+            x.Isbn == isbn,
+            cancellationToken);
+    }
 }
