@@ -9,6 +9,8 @@ public sealed class BookCopy : Entity
 {
     public Guid BookId { get; private set; }
 
+    public Book Book { get; private set; } = null!;
+
     public Barcode Barcode { get; private set; } = null!;
 
     public string ShelfLocation { get; private set; } = null!;

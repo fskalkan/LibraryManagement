@@ -181,7 +181,7 @@ namespace LibraryManagement.Infrastructure.Migrations
 
                             b1.HasKey("AuthorId");
 
-                            b1.ToTable("Authors");
+                            b1.ToTable("Authors", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AuthorId");
@@ -218,7 +218,7 @@ namespace LibraryManagement.Infrastructure.Migrations
 
                             b1.HasKey("BookId");
 
-                            b1.ToTable("Books");
+                            b1.ToTable("Books", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("BookId");
@@ -253,7 +253,7 @@ namespace LibraryManagement.Infrastructure.Migrations
 
                             b1.HasKey("BookCopyId");
 
-                            b1.ToTable("BookCopies");
+                            b1.ToTable("BookCopies", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("BookCopyId");
@@ -265,6 +265,25 @@ namespace LibraryManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("LibraryManagement.Domain.Entities.Member", b =>
                 {
+                    b.OwnsOne("LibraryManagement.Domain.ValueObjects.Email", "Email", b1 =>
+                        {
+                            b1.Property<Guid>("MemberId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)")
+                                .HasColumnName("Email");
+
+                            b1.HasKey("MemberId");
+
+                            b1.ToTable("Members", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("MemberId");
+                        });
+
                     b.OwnsOne("LibraryManagement.Domain.ValueObjects.FullName", "FullName", b1 =>
                         {
                             b1.Property<Guid>("MemberId")
@@ -284,26 +303,7 @@ namespace LibraryManagement.Infrastructure.Migrations
 
                             b1.HasKey("MemberId");
 
-                            b1.ToTable("Members");
-
-                            b1.WithOwner()
-                                .HasForeignKey("MemberId");
-                        });
-
-                    b.OwnsOne("LibraryManagement.Domain.ValueObjects.Email", "Email", b1 =>
-                        {
-                            b1.Property<Guid>("MemberId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(255)
-                                .HasColumnType("nvarchar(255)")
-                                .HasColumnName("Email");
-
-                            b1.HasKey("MemberId");
-
-                            b1.ToTable("Members");
+                            b1.ToTable("Members", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("MemberId");

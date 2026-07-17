@@ -24,7 +24,6 @@ public sealed class Book : AggregateRoot
     public Category Category { get; private set; } = null!;
 
     public BookStatus Status { get; private set; }
-    
 
     public IReadOnlyCollection<BookCopy> Copies => _copies.AsReadOnly();
 

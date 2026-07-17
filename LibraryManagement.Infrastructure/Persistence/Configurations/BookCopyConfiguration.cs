@@ -29,5 +29,10 @@ public sealed class BookCopyConfiguration : IEntityTypeConfiguration<BookCopy>
 
         builder.Property(x => x.Status)
             .HasConversion<int>();
+
+        builder.HasOne(x => x.Book)
+            .WithMany(x => x.Copies)
+            .HasForeignKey(x => x.BookId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

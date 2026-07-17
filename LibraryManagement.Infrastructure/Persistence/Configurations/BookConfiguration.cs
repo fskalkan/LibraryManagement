@@ -39,10 +39,5 @@ public sealed class BookConfiguration : IEntityTypeConfiguration<Book>
             .WithMany()
             .HasForeignKey(x => x.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasMany(x => x.Copies)
-            .WithOne()
-            .HasForeignKey(x => x.BookId)
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }
