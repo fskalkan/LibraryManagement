@@ -17,6 +17,8 @@ public sealed class BookRepository : IBookRepository
     public async Task<Book?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _context.Books
+            .Include(x => x.Author)
+            .Include(x => x.Category)
             .Include(x => x.Copies)
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
@@ -46,5 +48,15 @@ public sealed class BookRepository : IBookRepository
     public void Remove(Book book)
     {
         _context.Books.Remove(book);
+    }
+
+    public async Task<IReadOnlyList<Book>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Books
+        .Include(x => x.Author)
+        .Include(x => x.Category)
+        .AsNoTracking()
+        .OrderBy(x => x.Title)
+        .ToListAsync(cancellationToken);
     }
 }
