@@ -20,16 +20,34 @@ public sealed class MemberRepository : IMemberRepository
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
+    public async Task<IReadOnlyList<Member>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Members
+            .AsNoTracking()
+            .OrderBy(x => x.FullName.LastName)
+            .ThenBy(x => x.FullName.FirstName)
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task<Member?> GetByEmailAsync(Email email, CancellationToken cancellationToken = default)
     {
         return await _context.Members
-            .FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
+            .FirstOrDefaultAsync(x => x.Email.Value == email.Value, cancellationToken);
     }
 
     public async Task<bool> ExistsByEmailAsync(Email email, CancellationToken cancellationToken = default)
     {
         return await _context.Members
-            .AnyAsync(x => x.Email == email, cancellationToken);
+            .AnyAsync(x => x.Email.Value == email.Value, cancellationToken);
+    }
+
+    public async Task<bool> ExistsByEmailExceptMemberAsync(Guid memberId, Email email, CancellationToken cancellationToken = default)
+    {
+        return await _context.Members
+            .AnyAsync(x =>
+                x.Id != memberId &&
+                x.Email.Value == email.Value,
+                cancellationToken);
     }
 
     public async Task AddAsync(Member member, CancellationToken cancellationToken = default)

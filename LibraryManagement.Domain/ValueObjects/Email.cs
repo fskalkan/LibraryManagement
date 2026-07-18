@@ -9,7 +9,7 @@ public sealed record Email
         @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
         RegexOptions.Compiled);
 
-    public string Value { get; }
+    public string Value { get; private set; } = null!;
 
     private Email(string value)
     {
