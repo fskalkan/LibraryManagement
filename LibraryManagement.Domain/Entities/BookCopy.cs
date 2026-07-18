@@ -88,4 +88,9 @@ public sealed class BookCopy : Entity
 
         ShelfLocation = shelfLocation.Trim();
     }
+
+    public void ChangeBarcode(Barcode barcode)
+    {
+        Barcode = barcode;
+    }
 }
