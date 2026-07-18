@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
-namespace LibraryManagement.Application.Features.BookCopies.Commands.CreateBookCopy
-{
-    internal class CreateBookCopyCommand
-    {
-    }
-}
+public sealed record CreateBookCopyCommand(
+    Guid BookId,
+    string Barcode,
+    string ShelfLocation)
+    : IRequest<Guid>;
