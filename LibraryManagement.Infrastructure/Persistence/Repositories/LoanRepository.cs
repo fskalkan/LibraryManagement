@@ -1,4 +1,5 @@
 ﻿using LibraryManagement.Domain.Entities;
+using LibraryManagement.Domain.Enums;
 using LibraryManagement.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,7 +38,8 @@ public sealed class LoanRepository : ILoanRepository
     public async Task<bool> HasActiveLoanForBookCopyAsync(Guid bookCopyId, CancellationToken cancellationToken = default)
     {
         return await _context.Loans.AnyAsync(
-                x => x.BookCopyId == bookCopyId &&
-                x.Status == Domain.Enums.LoanStatus.Active, cancellationToken);
+            x => x.BookCopyId == bookCopyId &&
+                 x.Status == LoanStatus.Active,
+            cancellationToken);
     }
 }
