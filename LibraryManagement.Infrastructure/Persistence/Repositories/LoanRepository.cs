@@ -50,4 +50,15 @@ public sealed class LoanRepository : ILoanRepository
                  x.Status == LoanStatus.Active,
             cancellationToken);
     }
+
+    public async Task<IReadOnlyList<Loan>> GetOverdueLoansAsync(CancellationToken cancellationToken = default)
+    {
+        var today = DateOnly.FromDateTime(DateTime.UtcNow);
+
+        return await _context.Loans
+            .Where(x =>
+                x.Status == LoanStatus.Active &&
+                x.DueDate < today)
+            .ToListAsync(cancellationToken);
+    }
 }

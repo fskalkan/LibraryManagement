@@ -1,4 +1,5 @@
 ﻿using LibraryManagement.Domain.Repositories;
+using LibraryManagement.Infrastructure.BackgroundJobs;
 using LibraryManagement.Infrastructure.Persistence;
 using LibraryManagement.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ public static class DependencyInjection
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IMemberRepository, MemberRepository>();
         services.AddScoped<ILoanRepository, LoanRepository>();
+        services.AddScoped<LoanOverdueJob>();
 
         return services;
     }

@@ -15,4 +15,6 @@ public interface ILoanRepository
     void Remove(Loan loan);
 
     Task<bool> HasActiveLoanForBookCopyAsync(Guid bookCopyId, CancellationToken cancellationToken = default);
+    
+    Task<IReadOnlyList<Loan>> GetOverdueLoansAsync(CancellationToken cancellationToken = default);
 }
