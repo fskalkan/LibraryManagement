@@ -5,6 +5,8 @@ namespace LibraryManagement.Domain.Repositories;
 public interface ILoanRepository
 {
     Task<Loan?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+    
+    Task<IReadOnlyList<Loan>> GetAllAsync(CancellationToken cancellationToken = default);
 
     Task AddAsync(Loan loan, CancellationToken cancellationToken = default);
 

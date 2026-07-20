@@ -20,6 +20,14 @@ public sealed class LoanRepository : ILoanRepository
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
+    public async Task<IReadOnlyList<Loan>> GetAllAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Loans
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+    }
+
+
     public async Task AddAsync(Loan loan, CancellationToken cancellationToken = default)
     {
         await _context.Loans.AddAsync(loan, cancellationToken);
